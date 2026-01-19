@@ -68,7 +68,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- 2. 資料庫 (Unit 21: 14個單字 - 嚴格對照 CSV) ---
+# --- 2. 資料庫 (Unit 21: User Final Corrected) ---
 vocab_data = [
     {"amis": "Loma'", "chi": "家", "icon": "🏠", "source": "CSV Row 328"},
     {"amis": "'Anengan", "chi": "椅子 / 座位", "icon": "🪑", "source": "CSV Row 1846"},
@@ -78,15 +78,15 @@ vocab_data = [
     {"amis": "Impic", "chi": "鉛筆", "icon": "✏️", "source": "CSV Row 742"},
     {"amis": "Fawahan", "chi": "門", "icon": "🚪", "source": "CSV Row 731"},
     {"amis": "Sasingaran", "chi": "窗戶", "icon": "🪟", "source": "CSV Row 4419"},
-    {"amis": "Kama", "chi": "鍋子", "icon": "🥘", "source": "CSV Row 4749"},
+    {"amis": "Dangah", "chi": "鍋子", "icon": "🥘", "source": "User Fix"}, # 修正
     {"amis": "Tatipelok", "chi": "紙", "icon": "📄", "source": "CSV Row 4841"},
-    {"amis": "Dingwa", "chi": "電話", "icon": "☎️", "source": "CSV Row 6031"},
+    {"amis": "Tingwa", "chi": "電話", "icon": "☎️", "source": "CSV Row 6031"},
     {"amis": "Sasing", "chi": "照片", "icon": "🖼️", "source": "CSV Row 651"},
-    {"amis": "Pafilo", "chi": "燈", "icon": "💡", "source": "CSV Row 4842"},
-    {"amis": "Tilibi", "chi": "電視", "icon": "📺", "source": "Moedict (CSV無)"},
+    {"amis": "Dawdaw", "chi": "燈", "icon": "💡", "source": "User Fix"}, # 修正
+    {"amis": "Tilifi", "chi": "電視", "icon": "📺", "source": "User Fix"}, # 修正
 ]
 
-# --- 句子庫 (7句: 嚴格源自 CSV) ---
+# --- 句子庫 (7句: 嚴格源自 CSV + User Fix) ---
 sentences = [
     {"amis": "Awa ko loma' no-ni a wawa.", "chi": "這個小孩沒有家。", "icon": "🏠", "source": "CSV Row 328"},
     {"amis": "O sa-ka-i-hacowa ko-ya a kaysing?", "chi": "那個碗是要用在何時的？", "icon": "🥣", "source": "CSV Row 589"},
@@ -94,66 +94,66 @@ sentences = [
     {"amis": "O ka-lo-maan ni Panay ko-ra a impic?", "chi": "那支鉛筆是被Panay當成什麼？", "icon": "✏️", "source": "CSV Row 742"},
     {"amis": "Maro' kamo i 'anengan.", "chi": "你們坐在椅子上。", "icon": "🪑", "source": "CSV Row 1846"},
     {"amis": "O ma-lo-tatakel kona sapad.", "chi": "這木板要做成床鋪。", "icon": "🛏️", "source": "CSV Row 1176"},
-    {"amis": "O-ra a sasing ko a-i-hacowa-en.", "chi": "那張照片是要一直處在過去時刻的。", "icon": "🖼️", "source": "CSV Row 651"},
+    {"amis": "Mi-nengneng to tilifi.", "chi": "看電視。", "icon": "📺", "source": "User Fix: Tilifi"},
 ]
 
-# --- 3. 隨機題庫 (CSV Verified) ---
+# --- 3. 隨機題庫 (User Fix Verified) ---
 raw_quiz_pool = [
     {
         "q": "Awa ko loma' no-ni a wawa.",
         "audio": "Awa ko loma' no-ni a wawa",
         "options": ["這個小孩沒有家", "這個小孩在學校", "這個小孩有錢"],
         "ans": "這個小孩沒有家",
-        "hint": "Loma' 是家 (Row 328)"
+        "hint": "Loma' 是家"
     },
     {
         "q": "Pasi-cowa-en ko-ni a fawah-an?",
         "audio": "Pasi-cowa-en ko-ni a fawah-an",
         "options": ["這道門要朝向哪裡？", "這扇窗戶要開嗎？", "這個人要去哪裡？"],
         "ans": "這道門要朝向哪裡？",
-        "hint": "Fawah-an 是門 (Row 731)"
+        "hint": "Fawah-an 是門"
     },
     {
         "q": "單字測驗：Cokoy",
         "audio": "Cokoy",
         "options": ["桌子", "椅子", "床"],
         "ans": "桌子",
-        "hint": "Row 1940: 被偷的 Cokoy (桌子)"
+        "hint": "吃飯寫字用的平面"
     },
     {
         "q": "單字測驗：'Anengan",
         "audio": "'Anengan",
         "options": ["椅子/座位", "地板", "桌子"],
         "ans": "椅子/座位",
-        "hint": "Row 1846: Maro' i 'anengan (坐在椅子上)"
+        "hint": "坐著的器具"
     },
     {
         "q": "單字測驗：Impic",
         "audio": "Impic",
         "options": ["鉛筆", "書", "紙"],
         "ans": "鉛筆",
-        "hint": "Row 742: Panay 的 impic"
+        "hint": "寫字的工具"
     },
     {
-        "q": "O ma-lo-tatakel kona sapad.",
-        "audio": "O ma-lo-tatakel kona sapad",
-        "options": ["這木板要做成床鋪", "這木板要做成桌子", "這木板要做成椅子"],
-        "ans": "這木板要做成床鋪",
-        "hint": "Tatakel 是床鋪 (Row 1176)"
+        "q": "單字測驗：Dangah",
+        "audio": "Dangah",
+        "options": ["鍋子", "碗", "湯匙"],
+        "ans": "鍋子",
+        "hint": "煮飯用的 Dangah"
     },
     {
-        "q": "單字測驗：Kaysing",
-        "audio": "Kaysing",
-        "options": ["碗", "鍋子", "湯匙"],
-        "ans": "碗",
-        "hint": "Row 589: 裝食物的 Kaysing"
+        "q": "單字測驗：Dawdaw",
+        "audio": "Dawdaw",
+        "options": ["燈", "電視", "電話"],
+        "ans": "燈",
+        "hint": "發光的 Dawdaw"
     },
      {
-        "q": "單字測驗：Dingwa",
-        "audio": "Dingwa",
-        "options": ["電話", "電視", "電燈"],
-        "ans": "電話",
-        "hint": "Row 6031: Dingwa"
+        "q": "單字測驗：Tilifi",
+        "audio": "Tilifi",
+        "options": ["電視", "電話", "電影"],
+        "ans": "電視",
+        "hint": "用看的 Tilifi"
     }
 ]
 
@@ -177,7 +177,7 @@ if 'init' not in st.session_state:
 
 # --- 5. 主介面 ---
 st.markdown("<h1 style='text-align: center; color: #5D4037;'>Unit 21: O Lalosidan</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #666;'>家具與生活用品 (CSV Verified)</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #666;'>家具與生活用品 (User Corrected)</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📚 詞彙與句型", "🎲 隨機挑戰"])
 
@@ -199,7 +199,7 @@ with tab1:
                 safe_play_audio(word['amis'])
 
     st.markdown("---")
-    st.subheader("🗣️ 實用句型 (Data-Driven)")
+    st.subheader("🗣️ 實用句型")
     for i, s in enumerate(sentences):
         st.markdown(f"""
         <div class="sentence-box">
