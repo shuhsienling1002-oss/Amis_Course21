@@ -29,7 +29,7 @@ def safe_play_audio(text):
 # --- 0. 系統配置 ---
 st.set_page_config(page_title="Unit 21: O Lalosidan", page_icon="🪑", layout="centered")
 
-# --- CSS 美化 (居家溫馨色調) ---
+# --- CSS 美化 (居家木質調) ---
 st.markdown("""
     <style>
     body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
@@ -37,27 +37,22 @@ st.markdown("""
     
     /* 單字卡 */
     .word-card {
-        background: linear-gradient(135deg, #D7CCC8 0%, #ffffff 100%);
+        background: linear-gradient(135deg, #EFEBE9 0%, #ffffff 100%);
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         text-align: center;
         margin-bottom: 15px;
-        border-bottom: 4px solid #8D6E63;
+        border-bottom: 4px solid #795548;
     }
     .emoji-icon { font-size: 48px; margin-bottom: 10px; }
     .amis-text { font-size: 22px; font-weight: bold; color: #5D4037; }
     .chinese-text { font-size: 16px; color: #7f8c8d; }
-    .morph-tag { 
-        background-color: #EFEBE9; color: #5D4037; 
-        padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: bold;
-        display: inline-block; margin-top: 5px;
-    }
     
     /* 句子框 */
     .sentence-box {
-        background-color: #EFEBE9;
-        border-left: 5px solid #A1887F;
+        background-color: #D7CCC8;
+        border-left: 5px solid #8D6E63;
         padding: 15px;
         margin: 10px 0;
         border-radius: 0 10px 10px 0;
@@ -66,99 +61,99 @@ st.markdown("""
     /* 按鈕 */
     .stButton>button {
         width: 100%; border-radius: 12px; font-size: 20px; font-weight: 600;
-        background-color: #D7CCC8; color: #4E342E; border: 2px solid #8D6E63; padding: 12px;
+        background-color: #BCAAA4; color: #3E2723; border: 2px solid #795548; padding: 12px;
     }
-    .stButton>button:hover { background-color: #BCAAA4; border-color: #5D4037; }
-    .stProgress > div > div > div > div { background-color: #8D6E63; }
+    .stButton>button:hover { background-color: #A1887F; border-color: #5D4037; }
+    .stProgress > div > div > div > div { background-color: #795548; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 2. 資料庫 (Unit 21: 14個單字) ---
+# --- 2. 資料庫 (Unit 21: 14個單字 - 嚴格對照 CSV) ---
 vocab_data = [
-    {"amis": "Lalosidan", "chi": "物品 / 器具", "icon": "📦", "source": "Moedict", "morph": "Root: Losid"},
-    {"amis": "Loma'", "chi": "家 / 房子", "icon": "🏠", "source": "Row 328", "morph": "Root"},
-    {"amis": "Takar", "chi": "桌子", "icon": "🔲", "source": "Moedict", "morph": "Root"},
-    {"amis": "Anan", "chi": "椅子", "icon": "🪑", "source": "Moedict", "morph": "Root"},
-    {"amis": "Kamaro'an", "chi": "座位 / 住處", "icon": "🧘", "source": "Moedict", "morph": "Ka-maro'-an (坐的地方)"},
-    {"amis": "Kaysing", "chi": "碗", "icon": "🥣", "source": "Row 589", "morph": "Root"},
-    {"amis": "Safing", "chi": "掃把", "icon": "🧹", "source": "Moedict", "morph": "Root"},
-    {"amis": "Impic", "chi": "鉛筆", "icon": "✏️", "source": "Row 742", "morph": "Loan: Enpitsu"},
-    {"amis": "Sapitilid", "chi": "筆 (寫字的工具)", "icon": "🖊️", "source": "Grammar", "morph": "Sa-pi-tilid (用來寫的)"},
-    {"amis": "Tilid", "chi": "書 / 字", "icon": "📖", "source": "Row 318", "morph": "Root"},
-    {"amis": "Tilibi", "chi": "電視", "icon": "📺", "source": "Loan", "morph": "Loan: TV"},
-    {"amis": "Dingwa", "chi": "電話", "icon": "☎️", "source": "Loan", "morph": "Loan: Denwa"},
-    {"amis": "Panan", "chi": "門", "icon": "🚪", "source": "Moedict", "morph": "Root"},
-    {"amis": "Sasing", "chi": "照片 / 照相", "icon": "🖼️", "source": "Moedict", "morph": "Root"},
+    {"amis": "Loma'", "chi": "家", "icon": "🏠", "source": "CSV Row 328"},
+    {"amis": "'Anengan", "chi": "椅子 / 座位", "icon": "🪑", "source": "CSV Row 1846"},
+    {"amis": "Cokoy", "chi": "桌子", "icon": "🔲", "source": "CSV Row 1940"},
+    {"amis": "Tatakel", "chi": "床鋪", "icon": "🛏️", "source": "CSV Row 1176"},
+    {"amis": "Kaysing", "chi": "碗", "icon": "🥣", "source": "CSV Row 589"},
+    {"amis": "Impic", "chi": "鉛筆", "icon": "✏️", "source": "CSV Row 742"},
+    {"amis": "Fawahan", "chi": "門", "icon": "🚪", "source": "CSV Row 731"},
+    {"amis": "Sasingaran", "chi": "窗戶", "icon": "🪟", "source": "CSV Row 4419"},
+    {"amis": "Kama", "chi": "鍋子", "icon": "🥘", "source": "CSV Row 4749"},
+    {"amis": "Tatipelok", "chi": "紙", "icon": "📄", "source": "CSV Row 4841"},
+    {"amis": "Dingwa", "chi": "電話", "icon": "☎️", "source": "CSV Row 6031"},
+    {"amis": "Sasing", "chi": "照片", "icon": "🖼️", "source": "CSV Row 651"},
+    {"amis": "Pafilo", "chi": "燈", "icon": "💡", "source": "CSV Row 4842"},
+    {"amis": "Tilibi", "chi": "電視", "icon": "📺", "source": "Moedict (CSV無)"},
 ]
 
-# --- 句子庫 (7句: 優先使用 data.csv) ---
+# --- 句子庫 (7句: 嚴格源自 CSV) ---
 sentences = [
-    {"amis": "Awa ko loma' noni a wawa.", "chi": "這個小孩沒有家。", "icon": "🏠", "source": "Row 328"},
-    {"amis": "O saka-i-hacowa koya a kaysing?", "chi": "那個碗是要用在何時的(工具)？", "icon": "🥣", "source": "Row 589"},
-    {"amis": "O kalomaan ni Panay kora a impic?", "chi": "那支鉛筆是被Panay當成什麼(做什麼用的)？", "icon": "✏️", "source": "Row 742 (Modified)"},
-    {"amis": "I cowa ko kamaro'an?", "chi": "座位在哪裡？", "icon": "🧘", "source": "Morph: Maro' -> Kamaro'an"},
-    {"amis": "Minengneng to tilibi i loma'.", "chi": "在家看電視。", "icon": "📺", "source": "Basic"},
-    {"amis": "Fangcal ko takar.", "chi": "桌子很漂亮。", "icon": "✨", "source": "Structure: Fangcal + Noun"},
-    {"amis": "Cima ko mitiliday to dingwa?", "chi": "誰在打電話？(誰是寫電話的人?)", "icon": "☎️", "source": "Structure practice"},
+    {"amis": "Awa ko loma' no-ni a wawa.", "chi": "這個小孩沒有家。", "icon": "🏠", "source": "CSV Row 328"},
+    {"amis": "O sa-ka-i-hacowa ko-ya a kaysing?", "chi": "那個碗是要用在何時的？", "icon": "🥣", "source": "CSV Row 589"},
+    {"amis": "Pasi-cowa-en ko-ni a fawah-an?", "chi": "這道門要朝向哪裡？", "icon": "🚪", "source": "CSV Row 731"},
+    {"amis": "O ka-lo-maan ni Panay ko-ra a impic?", "chi": "那支鉛筆是被Panay當成什麼？", "icon": "✏️", "source": "CSV Row 742"},
+    {"amis": "Maro' kamo i 'anengan.", "chi": "你們坐在椅子上。", "icon": "🪑", "source": "CSV Row 1846"},
+    {"amis": "O ma-lo-tatakel kona sapad.", "chi": "這木板要做成床鋪。", "icon": "🛏️", "source": "CSV Row 1176"},
+    {"amis": "O-ra a sasing ko a-i-hacowa-en.", "chi": "那張照片是要一直處在過去時刻的。", "icon": "🖼️", "source": "CSV Row 651"},
 ]
 
-# --- 3. 隨機題庫 (Moedict Verified) ---
+# --- 3. 隨機題庫 (CSV Verified) ---
 raw_quiz_pool = [
     {
-        "q": "Awa ko loma' noni a wawa.",
-        "audio": "Awa ko loma' noni a wawa",
+        "q": "Awa ko loma' no-ni a wawa.",
+        "audio": "Awa ko loma' no-ni a wawa",
         "options": ["這個小孩沒有家", "這個小孩在學校", "這個小孩有錢"],
         "ans": "這個小孩沒有家",
-        "hint": "Awa (沒有) + Loma' (家)"
+        "hint": "Loma' 是家 (Row 328)"
     },
     {
-        "q": "O saka-i-hacowa koya a kaysing?",
-        "audio": "O saka-i-hacowa koya a kaysing",
-        "options": ["那個碗是何時用的？", "那個碗是誰的？", "那個碗在哪裡？"],
-        "ans": "那個碗是何時用的？",
-        "hint": "Hacowa (何時) + Kaysing (碗)"
+        "q": "Pasi-cowa-en ko-ni a fawah-an?",
+        "audio": "Pasi-cowa-en ko-ni a fawah-an",
+        "options": ["這道門要朝向哪裡？", "這扇窗戶要開嗎？", "這個人要去哪裡？"],
+        "ans": "這道門要朝向哪裡？",
+        "hint": "Fawah-an 是門 (Row 731)"
     },
     {
-        "q": "O kalomaan ni Panay kora a impic?",
-        "audio": "O kalomaan ni Panay kora a impic",
-        "options": ["那支鉛筆是做什麼用的？", "那支鉛筆是誰的？", "那支鉛筆多少錢？"],
-        "ans": "那支鉛筆是做什麼用的？",
-        "hint": "Impic 是鉛筆 (Row 742)"
-    },
-    {
-        "q": "單字測驗：Kamaro'an",
-        "audio": "Kamaro'an",
-        "options": ["座位/住處", "吃飯", "睡覺"],
-        "ans": "座位/住處",
-        "hint": "Ka-maro'-an (坐的地方)"
-    },
-    {
-        "q": "單字測驗：Sapitilid",
-        "audio": "Sapitilid",
-        "options": ["筆(寫字工具)", "書", "橡皮擦"],
-        "ans": "筆(寫字工具)",
-        "hint": "Sa-pi-tilid (用來寫的)"
-    },
-    {
-        "q": "單字測驗：Takar",
-        "audio": "Takar",
+        "q": "單字測驗：Cokoy",
+        "audio": "Cokoy",
         "options": ["桌子", "椅子", "床"],
         "ans": "桌子",
-        "hint": "吃飯寫字用的平面"
+        "hint": "Row 1940: 被偷的 Cokoy (桌子)"
     },
     {
-        "q": "單字測驗：Anan",
-        "audio": "Anan",
-        "options": ["椅子", "桌子", "門"],
-        "ans": "椅子",
-        "hint": "坐著的器具"
+        "q": "單字測驗：'Anengan",
+        "audio": "'Anengan",
+        "options": ["椅子/座位", "地板", "桌子"],
+        "ans": "椅子/座位",
+        "hint": "Row 1846: Maro' i 'anengan (坐在椅子上)"
     },
     {
-        "q": "「家」的阿美語怎麼說？",
-        "audio": None,
-        "options": ["Loma'", "Omah", "Patiyamay"],
-        "ans": "Loma'",
-        "hint": "Row 328: Awa ko loma'..."
+        "q": "單字測驗：Impic",
+        "audio": "Impic",
+        "options": ["鉛筆", "書", "紙"],
+        "ans": "鉛筆",
+        "hint": "Row 742: Panay 的 impic"
+    },
+    {
+        "q": "O ma-lo-tatakel kona sapad.",
+        "audio": "O ma-lo-tatakel kona sapad",
+        "options": ["這木板要做成床鋪", "這木板要做成桌子", "這木板要做成椅子"],
+        "ans": "這木板要做成床鋪",
+        "hint": "Tatakel 是床鋪 (Row 1176)"
+    },
+    {
+        "q": "單字測驗：Kaysing",
+        "audio": "Kaysing",
+        "options": ["碗", "鍋子", "湯匙"],
+        "ans": "碗",
+        "hint": "Row 589: 裝食物的 Kaysing"
+    },
+     {
+        "q": "單字測驗：Dingwa",
+        "audio": "Dingwa",
+        "options": ["電話", "電視", "電燈"],
+        "ans": "電話",
+        "hint": "Row 6031: Dingwa"
     }
 ]
 
@@ -182,13 +177,13 @@ if 'init' not in st.session_state:
 
 # --- 5. 主介面 ---
 st.markdown("<h1 style='text-align: center; color: #5D4037;'>Unit 21: O Lalosidan</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #666;'>家具與生活用品 (Household Items)</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #666;'>家具與生活用品 (CSV Verified)</p>", unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs(["📚 詞彙與句型", "🎲 隨機挑戰"])
 
 # === Tab 1: 學習模式 ===
 with tab1:
-    st.subheader("📝 核心單字 (構詞分析)")
+    st.subheader("📝 核心單字")
     col1, col2 = st.columns(2)
     for i, word in enumerate(vocab_data):
         with (col1 if i % 2 == 0 else col2):
@@ -197,7 +192,6 @@ with tab1:
                 <div class="emoji-icon">{word['icon']}</div>
                 <div class="amis-text">{word['amis']}</div>
                 <div class="chinese-text">{word['chi']}</div>
-                <div class="morph-tag">{word['morph']}</div>
                 <div class="source-tag">src: {word['source']}</div>
             </div>
             """, unsafe_allow_html=True)
